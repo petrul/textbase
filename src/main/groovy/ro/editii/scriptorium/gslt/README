@@ -1,0 +1,13 @@
+GSLT : The G Stylesheet Transformations
+===============
+
+GSLT is XSLT in Groovy syntax.
+
+Easier to understand and maintain than XSLT, combining an easier to read DSL and the
+power of Groovy to generate precisely the XSLT.
+
+Keeps all the concepts of XSLT. Templates and all.
+
+Whatever you write in XSLT, you can write in GSLT with less clutter.
+
+But, whenever you feel like, you can just use regular, powerful groovy code.

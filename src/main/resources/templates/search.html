@@ -1,0 +1,91 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ro">
+<head>
+    <title>Etext store - search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script th:replace="fragments/google-analytics" ></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Alegreya:400,400i,700|PT+Sans+Narrow" rel="stylesheet" />
+
+    <link rel="stylesheet" th:href="@{/css/etext.store.css}" href="../static/css/etext.store.css" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/search.css}" href="../static/css/search.css" type="text/css">
+    
+</head>
+<body>
+
+<div id="navbar" class="navbar">
+    <a th:href="@{/}" href="#">TEXT&nbsp;❖&nbsp;BASE</a>
+    <a
+            class="title"
+            th:text="${''}"
+            th:href="@{.}"
+            href="#"
+    >Numele Autorului — Titlul cărții care poate fi destul de lung, adică de fapt nu știm cât de lung</a>
+</div>
+
+
+    <div id="searchbox">
+
+        <div id="logo" style="display:flex; justify-content: center; align-items: center;">
+
+            <img 
+                
+                style="width:50px; height:50px; text-align: center;"
+                th:src="@{img/quote-logo-etext.store.png}" 
+                src="../static/img/quote-logo-etext.store.png" 
+                alt="Etext store"/>
+            <span>TEXT&nbsp;❖&nbsp;BASE</span>
+
+        </div>
+
+
+            <form 
+                id="searchform"
+                action="/search" 
+            >
+
+                <input name="q" 
+                    class="form-control" 
+                    type="text"
+                    autofocus
+                    th:value="${q}"
+                />
+                <span class="glyphicon glyphicon-search"></span>
+
+                <input 
+                    id="search-submit-button"
+                    type="submit" 
+                    value="Search" 
+                    class="btn"
+                    
+                />
+
+            </form>
+
+
+        <div id="search-results">
+        </div>
+
+    </div>
+
+    <div id="results">
+        <div id="authors" th:if="${authors}">
+            <ul th:each="a: ${authors}">
+                <li><a th:href="${a.strId}" th:text="${a.visualName}"></a></li>
+            </ul>
+        </div>
+        <div id="divs" th:if="${divs}">
+            <ul th:each="d: ${divs}">
+                <li><a th:href="@{|/${d.completePath}|}"><span th:text="${d.author.visualName}"></span> — <span th:text="${d.head}"></span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+</body>
+</html>

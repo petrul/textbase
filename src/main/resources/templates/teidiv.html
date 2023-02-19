@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        th:lang="${language}"  lang="ro">
+<head>
+    <meta charset="utf-8">
+    <title th:text="${author.visualName + ' — ' + op.head + ' — ' + div.head }">Vasile Alecsandri — Scrieri — Scrieri</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <link th:if=${prev} rel="prev" th:href="@{|/${prev.completePath}|}" href="prev_url" />
+    <link th:if=${next} rel="next" th:href="@{|/${next.completePath}|}" href="next_url" />
+
+    <script th:replace="fragments/google-analytics" ></script>
+
+    <link rel="stylesheet" 
+        href="../static/bootstrap-5.2.1-dist/css/bootstrap.min.css"
+        th:href="@{/bootstrap-5.2.1-dist/css/bootstrap.min.css}"
+        crossorigin="anonymous"
+    />
+    <link href="https://fonts.googleapis.com/css?family=Alegreya:400,400i,700|PT+Sans+Narrow" rel="stylesheet" />
+    <link href="https://slavonic.github.io/css/fonts.css" type="text/css" rel="stylesheet" >
+
+    <link rel="stylesheet" th:href="@{/css/etext.store.css}" href="../static/css/etext.store.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/teidiv.css}" href="../static/css/teidiv.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/share-buttons.css}" href="../static/css/share-buttons.css" type="text/css" />
+    
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/breadcrumb2.css}" href="../static/css/breadcrumb2.css" type="text/css" />
+
+
+    <meta name="author" th:content="${author.visualName}" content="Vasile Alecsandri"/>
+
+    <meta name="thumbnail" content=""/>
+    <meta name="keywords" content=""/>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@scriptoriumro" />
+    <meta name="twitter:creator" th:content="${author.visualName}">
+    <meta name="twitter:title" th:content="${author.visualName + ' — ' + op.head + ' — ' + div.head }">
+    <meta name="twitter:description" th:content="''" />
+    <meta name="twitter:image" th:content="${featuredImage}" />
+
+    <!-- Facebook -->
+    <meta property="og:url" th:content="@{.}" content="http://etext.store/">
+    <meta property="og:title" th:content="${author.visualName + ' — ' + op.head + ' — ' + div.head }">
+    <meta property="og:type" content="article" />
+    <meta property="og:description" th:content="''" />
+    <meta property="og:image" th:content="${featuredImage}" />
+    <meta property="og:image:width" content="848" />
+    <meta property="og:image:height" content="1200" />
+
+</head>
+<body>
+
+    <div id="navbar" class="navbar">
+        <a th:href="@{/}" href="#">TEXT&nbsp;❖&nbsp;BASE</a>
+        <!-- <input type="text" placeholder="Search..."> -->
+        <a
+                class="title"
+                th:text="${author.visualName + ' — ' + op.head}"
+                th:href="@{|/${author.strId}/${op.urlFragment}|}"
+                href="#"
+        >Numele Autorului — Titlul cărții care poate fi destul de lung, adică de fapt nu știm cât de lung</a>
+    </div>
+
+    <div class="under_navbar">&nbsp;</div>
+    
+    <div class="body" >
+
+        <div class="wrapper">
+            <ul class="breadcrumbs">
+              <li class="first"><a href="/" th:href=@{/} class="icon-home"></a></li>
+
+              <li><a href="#" th:href=@{|/${author.strId}|} th:text="${author.visualName}">Vasile Veselovschii</a></li>
+              <li th:each="b: ${breadcrumb}"><a href="#" th:href="@{|/${b.completePath}|}" th:text="${b.head}">Opus or div head</a></li>
+              <li th:if="false"><a href="#">Chapter 1</a></li>
+              <li class="last active" th:if="false"><a href="#">Chapter 1.1</a></li>
+
+            </ul>
+          </div>
+        
+        <!--/* <nav id="nav" aria-label="breadcrumb">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item" ><a href="/" th:href=@{/}><span class="glyphicon glyphicon-home"/>Home</a></li>
+                <li class="breadcrumb-item" ><a href="#" th:href=@{|/${author.strId}|} th:text="${author.visualName}">Vasile Veselovschii</a></li>
+                <li class="breadcrumb-item" th:each="b: ${breadcrumb}"><a href="#" th:href="@{|/${b.completeUrl}|}" th:text="${b.head}">Opus</a></li>
+                <li class="breadcrumb-item" th:if="false"><a href="#">Chapter 1</a></li>
+                <li class="breadcrumb-item" th:if="false"><a href="#">Chapter 1.1</a></li>
+            </ul>
+        </nav> */-->
+
+
+        <!-- body of text -->
+        <div class="body-of-text" th:utext="${text}" >
+            <div><div type="div2">
+                    <!--<a id="share-button1" href="#" class="fab">-->
+                            <!--+<i class="fa fa-plus my-float">+</i>-->
+                    <!--</a>-->
+
+                <h2>Moș Nichifor Coțcariul (h2)</h2>
+                <p class="subtitle">(apărut în revista Foamea în 1345)</p>
+                <p>Moș Nichifor nu-i o închipuire 
+                        <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Inchipuire adica o naluca">
+                                <sup>1</sup>
+                          </button>
+                 din <em>povești</em>, ci e un om ca toți oamenii; el a fost odată, când a fost, trăitor din mahalaua Țuțuenii din Târgul Neamțului, dinspre satul Vânătorii Neamțului. Cam pe vremea aceea trăia moș Nichifor în Țuțueni, pe când bunicul bunicului meu fusese cimpoiaș la cumătria lui moș Dediu din Vânători, fiind cumătru mare Ciubăr-vodă, căruia moș Dediu i-a dăruit patruzeci și nouă de mioare, oacheșe numai de câte un ochi; iară popă, unchiul unchiului mamei mele, Ciubuc Clopotarul de la Mănăstirea Neamțului, care făcuse un clopot mare la acea mănăstire, cu cheltuiala lui, și avea dragoste să-l tragă singur la sărbători mari; pentru aceea îi și ziceau Clopotarul. Tocmai pe acea vreme trăia și moș Nichifor din Țuțueni.</p>
+                 <div class="lg">
+                        <p class="l">Maică-ta de-i vηe</p>
+                        <p class="l">Bine ar fi să vηe</p>
+                        <p class="l">Pân-la noi la vie.</p>
+                     </div>
+                 <p>Moș Nichifor era harabagiu. Căruța lui, deși era ferecată cu teie, cu curmeie, însă era o căruță bună, încăpătoare și îndemânatică. Un poclit de rogojini oprea și soarele și ploaia de a răzbate în căruța lui moș Nichifor. De inima căruței atârnau păcornița cu feleștiocul și posteuca, care se izbeau una de alta, când mergea căruța, și făceau: tronca, tranca! tronca, tranca! 
+                     Iară în belciugul de la carâmbul dedesubt, din stânga, era aninată o bărdiță, pentru felurite întâmplări. </p>
+                     
+                     <h2><span class="head-label">Capitolul II</span>H2, ăsta este un heading 2</h2>
+                     <p>Două iepe, albe ca zăpada și iuți ca focul, se sprijineau mai totdeauna de oiștea căruței; mai totdeauna, dar nu totdeauna, căci moș Nichifor era și geambaș de cai, și când îi venea la socoteală, făcea schimb, ori vindea câte-o iapă chiar în mijlocul drumului, și atunci rămânea oiștea goală pe de-o parte. Îi plăcea moșneagului să aibă tot iepe tinere și curățele; asta era slăbiciunea lui. Mă veți întreba, poate: De ce iepe, și totdeauna albe? Vă voi spune și aceasta: iepe, pentru că moș Nichifor ținea să aibă prăsilă; albe, pentru că albeața iepelor, zicea el, îi slujea de fanar noaptea la drum.</p>
+                
+                <h3><span class="head-label">subcp. 2.1</span>H3, aici vine un heading III</h3>
+                     <p>Moș Nichifor nu era dintre aceia care să nu știe “că nu-i bine să te pui viziteu la cai albi și slugă la femei”; el știa și aceasta, dar iepele erau ale lui, și, când le grijea, grijite erau, iar când nu, n-avea cine să-i bănuiască.</p>
+                
+                     <h4><span class="head-label">subcp. 2.1.1</span>H4, aici vine un heading 4</h4>
+                     <p>— Ia mai dați-vă și pe jos, căci calul nu-i ca dobitocul, să poată vorbi...</p>
+
+                     <h5><span class="head-label">5.</span>heading 5</h5>
+
+                     <div type="div3">
+                        <h3>Noapte de vară</h3>
+                        <p class="subtitle">Publicată în ''Lumea ilustrată'', 1892, nr. 7</p>
+                        <div class="lg">
+                           <p class="l">Zările, de farmec pline,</p>
+                           <p class="l">Strălucesc în luminiș;</p>
+                           <p class="l">Zboară mierlele-n tufiș</p>
+                           <p class="l">Și din codri noaptea vine</p>
+                           <p class="l">Pe furiș.</p>
+                        </div>
+                        <div class="lg">
+                           <p class="l">Care cu poveri de muncă</p>
+                           <p class="l">Vin încet și scârțâind;</p>
+                           <p class="l">Turmele s-aud mugind,</p>
+                           <p class="l">Și flăcăii vin pe luncă</p>
+                           <p class="l">Hăulind.</p>
+                        </div>
+                        <div class="lg">
+                           <p class="l">Cu cofița, pe-ndelete,</p>
+                           <p class="l">Vin neveste de la râu;</p>
+                           <p class="l">Și, cu poala prinsă-n brâu,</p>
+                           <p class="l">Vin cântând în stoluri fete</p>
+                           <p class="l">De la grâu.</p>
+                           <p class="l">Și o linie care uite că nu intră într-o singură linie.</p>
+                        </div>
+                        <p class="end italic">zise Zaratustra</p>
+                     </div>
+
+             </div>
+             </div>
+        </div>
+
+        <ul 
+            id="toc" 
+            th:if="${children != null && children.size() > 0}"
+            >
+            <li th:each="child: ${children}">
+                <a 
+                    th:href="@{|${#httpServletRequest.requestURI}/${child.urlFragment}|}" 
+                    href="#">
+                    <span th:text="${child.head}">First subchapter</span>
+                </a>
+            </li>
+            <!-- <li class="last"><a
+                    th:href="@{|${#httpServletRequest.requestURL}/${children.get(children.size() - 1).urlFragment}|}" href="#">
+                <span th:text="${children.get(children.size() - 1).head}" >A second subchapter</span></a>
+            </li> -->
+        </ul>
+
+        <div id="share-buttons-bottom"
+             th:with="thisurl=${#httpServletRequest.requestURI}">
+            <a
+                    href="https://twitter.com/share?url=https://textbase.scriptorium.ro&amp;text=Ia%20uite%20ce-am%20gasit!&amp;hashtags=textbase"
+                    th:href="'https://twitter.com/share?url=http://textbase.scriptorium.ro' + ${#httpServletRequest.requestURI} + '&amp;text=' + ${author.visualName + ' — ' + op.head + ' — ' + div.head } + ' #textbase'"
+                    target="_blank">
+                <img src="/img/twitter.svg" alt="Share on Twitter" />
+            </a>
+
+            <a
+                    href="http://www.facebook.com/sharer.php?u=https://textbase.scriptorium.ro"
+                    th:href="'http://www.facebook.com/sharer.php?u=http://textbase.scriptorium.ro' + ${#httpServletRequest.requestURI}"
+                    target="_blank">
+                <img src="/img/facebook.svg" alt="Share on Facebook" />
+            </a>
+        </div>
+
+        <div id="navbuttons">
+            <a th:if="${prev}"  th:href="@{|/${prev.completePath}|}" href="#"><span><img title="Previous chapter (press left key)" th:src="@{/img/Next_Arrow.svg}" src="../static/img/Next_Arrow.svg" class="navbutton rotate-180" /></span></a>
+            <a th:if="${up}"    th:href="@{|/${up.completePath}|}"   href="#"><span><img  th:src="@{/img/Next_Arrow.svg}" src="../static/img/Next_Arrow.svg" class="navbutton rotate-270" /></span></a>
+            <a th:if="${next}"  th:href="@{|/${next.completePath}|}" href="#"><span><img title="Next chapter (press right key)" th:src="@{/img/Next_Arrow.svg}" src="../static/img/Next_Arrow.svg" class="navbutton" /></span></a>
+        </div>
+
+        <div class="meta" th:if="${license}">
+            <div th:if="${license}"><span th:utext="${license}">Attribution do not copy or I might kill you.</span></div>
+            <div th:if="${source}">Source: <div th:utext="${source}">Retrieved from wikisource on this date</div></div>
+            <div>Language: <span th:text="${language}">ro</span></div>
+        </div>
+
+    </div>
+
+    <script 
+        src="../static/js/jquery-3.3.1.min.js"   
+        th:src="@{/js/jquery-3.3.1.min.js}"
+        oldsrc="https://code.jquery.com/jquery-3.3.1.min.js"   
+        crossorigin="anonymous"
+    ></script>
+    <script
+        src="https://unpkg.com/@popperjs/core@2"
+        th:src="@{/js/popper-2.11.6.min.js}"
+        crossorigin="anonymous"></script>
+    <script 
+        src="../static/bootstrap-5.2.1-dist/js/bootstrap.min.js"
+        th:src="@{/bootstrap-5.2.1-dist/js/bootstrap.min.js}"
+        crossorigin="anonymous"
+    ></script>
+    <script th:src="@{/js/teidiv.js}" src="../static/js/teidiv.js"></script>
+    <script th:src="@{/js/share-buttons.js}" src="../static/js/share-buttons.js"></script>
+    <script th:src="@{/js/breadcrumb2.js}" src="../static/js/breadcrumb2.js"></script>
+</body>
+</html>

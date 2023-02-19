@@ -1,0 +1,46 @@
+#searchbox {
+    max-width:400px;
+    margin:100px auto;
+}
+
+#searchform {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: start; */
+    align-items: center;
+    width:400px;
+    margin: 0px auto;
+}
+
+#search-submit-button {
+    background-color: green;
+    color:white;
+}
+
+
+#logo span {
+    text-transform: uppercase;
+    padding-left:20px;
+}
+
+#search-submit-button {
+    margin-top: 40px;
+    width: 200px;
+}
+.form-control {
+    padding-right: 30px;
+}
+
+.form-control + .glyphicon {
+    position: absolute;
+    right: 0;
+    padding: 8px 27px;
+}
+
+#results #authors li {
+    background-color: blanchedalmond;
+}
+
+#results #divs li {
+    background-color: aqua;
+}

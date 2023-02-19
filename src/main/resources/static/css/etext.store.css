@@ -1,0 +1,66 @@
+a {
+    color:green;
+}
+
+
+div.navbar a, div.navbar span {    
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 18pt;
+}
+
+/* div.navbar input {
+    margin: auto 0 auto 0;
+    vertical-align: middle, -webkit-baseline-middle;
+} */
+
+
+div.navbar {
+    overflow: hidden;
+    position: fixed;
+    flex-wrap: nowrap;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* height: 40pt; */
+    background: rgb(2,64,99);
+    background: linear-gradient(90deg, rgba(2,64,99,1) 0%, rgba(60,168,63,1) 22%, rgba(4,74,111,1) 100%);
+    padding:0;
+
+    -webkit-box-shadow: 8px 8px 30px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 8px 8px 30px 0px rgba(0,0,0,0.4);
+    box-shadow: 8px 8px 30px 0px rgba(0,0,0,0.4);
+
+    font-size: 20px;
+}
+
+div.navbar a {
+    white-space: nowrap;
+}
+
+
+#share-buttons, #share-buttons-bottom {
+    width:100%;
+    /* background-color: green; */
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#share-buttons img, #share-buttons-bottom img {
+    width: 50px;
+    padding: 5px;
+    border: 0;
+    box-shadow: 0;
+    /* background-color: red; */
+    /* float: left; */
+}
+
+#share-buttons a, #share-buttons-bottom a {
+    /* float:right; */
+    /* background-color: yellow; */
+}

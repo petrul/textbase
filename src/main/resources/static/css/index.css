@@ -1,0 +1,61 @@
+/* #logo {
+    width: 100px;
+} */
+
+#logo span {
+    text-transform: uppercase;
+    padding-left:20px;
+}
+
+#search-submit-button {
+    margin-top: 40px;
+    width: 200px;
+}
+.form-control {
+    padding-right: 30px;
+}
+
+.form-control + .glyphicon {
+    position: absolute;
+    right: 0;
+    padding: 8px 27px;
+}
+/*
+#featured {
+
+} */
+
+#featured ul li {
+    display: inline;
+    /* list-style-type: circle;
+    list-style-position: initial; */
+    padding: 10px;
+    vertical-align: middle;
+}
+
+#featured ul li::before {
+    content : "♦";
+    color:red;
+    font-size: 150%;
+}
+
+
+
+/* #featured ul li:before  {
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+    border-bottom: 70px solid red;
+    position: relative;
+    top: -50px;
+  }
+.diamond-narrow:after {
+    content: '';
+    position: absolute;
+    left: -50px;
+    top: 70px;
+    width: 0;
+    height: 0;
+    border: 50px solid transparent;
+    border-top: 70px solid red;
+  } */

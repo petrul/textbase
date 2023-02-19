@@ -1,0 +1,224 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.3'
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+    id 'java'
+    id 'groovy'
+    id 'eclipse'
+    id 'idea'
+    id "maven-publish"
+}
+
+idea {
+    module {
+        excludeDirs += files("node_modules")
+    }
+}
+
+group = 'ro.editii'
+version = '0.7-SNAPSHOT'
+sourceCompatibility = 11
+
+defaultTasks "bootRun"
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {url "https://plugins.gradle.org/m2/"}
+    maven { url = "file:///gv0/repo/releases" }
+    maven { url = "file:///gv0/repo/snapshots" }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        // myLibrary(MavenPublication) { // plain small jar
+        //     from components.java
+        // }
+        bootJava(MavenPublication) { // fat jar
+            artifact bootJar
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'myRepo'
+             if(project.version.endsWith('-SNAPSHOT')) {
+                url = "file:///gv0/repo/snapshots"
+            } else {
+                url = "file:///gv0/repo/releases"
+            }
+        }
+    }
+}
+
+def static getGitLatestCommit() {
+    final String cmd = 'git log -n 1 --pretty=format:%H 2>&1'
+    final String str = cmd.execute().text.trim() //.substring(0,8);
+    return str
+}
+
+processResources {
+    // interested particularly in application.properties and version.properties
+    filesMatching("**/version.properties") {
+        def prop = [
+            "buildnumber" : System.getenv()['BUILD_NUMBER'],
+            "version" : project.properties['version'],
+            'builddate' : new Date().toString(),
+            'git_latest_commit': getGitLatestCommit(),
+            'git_branch': 'git rev-parse --abbrev-ref HEAD'.execute().text,
+            'buildmachine' : 'hostname'.execute().text
+        ]
+        expand(prop)
+    }
+}
+
+
+// asta e ca sa mearga devtools cand execut $ gradle bootRun
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+
+dependencies {
+
+//	implementation('org.springframework.boot:spring-boot-starter-data-cassandra')
+//	implementation('org.springframework.boot:spring-boot-starter-data-elasticsearch')
+	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+	implementation('org.springframework.boot:spring-boot-starter-data-rest')
+	implementation('org.springframework.boot:spring-boot-starter-web')
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("javax.validation:validation-api:2.0.1.Final")
+
+
+    implementation group: 'commons-cli', name: 'commons-cli', version: '1.4'
+    implementation(group: 'mysql', name: 'mysql-connector-java', version: '8.0.13')
+
+	implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+    implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation group: 'org.apache.commons', name: 'commons-text', version: '1.1'
+    implementation group: 'com.ibm.icu', name: 'icu4j', version: '71.1'
+
+    implementation group: 'net.sf.saxon', name: 'Saxon-HE', version: '9.9.0-2'
+    implementation 'org.codehaus.groovy:groovy-all:3.0.12'
+
+    implementation group: 'org.apache.lucene', name: 'lucene-core', version: '7.6.0'
+    implementation group: 'org.apache.lucene', name: 'lucene-demo', version: '7.6.0'
+    implementation group: 'org.apache.lucene', name: 'lucene-queryparser', version: '7.6.0'
+    implementation group: 'org.apache.lucene', name: 'lucene-queries', version: '7.6.0'
+    implementation group: 'org.apache.lucene', name: 'lucene-analyzers-common', version: '7.6.0'
+    implementation group: 'org.apache.lucene', name: 'lucene-snowball', version: '3.0.3'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    runtimeOnly('org.springframework.boot:spring-boot-devtools')
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation group: 'com.h2database', name: 'h2', version: '2.1.214'
+}
+
+/*
+ * run like this:
+ *  $ gradle  importTeiDivs --args="$HOME/work/scriptorium-masters/tei/"
+ */
+task importTeiDivs(dependsOn: 'classes', type: JavaExec) {
+    main = "ro.editii.scriptorium.cli.TeiDivImporterCli"
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs("-Dspring.profiles.active=cli,air -Dserver.port=7999")
+}
+
+bootRun {
+    systemProperties['spring.profiles.active'] = project.properties['profile']
+    println "bootRun: spring.profiles.active = " + systemProperties['spring.profiles.active']
+}
+
+
+test {
+    def profile = project.properties["profile"]
+    systemProperty "spring.profiles.active", profile
+    println("test:spring.profiles.active = " + systemProperties["spring.profiles.active"])
+//    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+
+/*
+    run the server like this:
+    $ gradle bootRun -Pprofile=air,autoimport
+ */
+ 
+jar {
+   enabled = true
+}
+
+bootJar {
+    classifier = 'application'
+    archiveAppendix = "b" + System.getenv()['BUILD_NUMBER']
+}
+
+// the admin app
+task runAdminIonicBuild {
+    final String dir = "src/main/webapp/admin"
+    final String subpath = "admin"
+    doLast {
+        exec {
+            workingDir "./$dir"
+            executable 'npm'
+            args 'install'
+        }
+        exec {
+            workingDir "./$dir"
+            executable 'ionic'
+            args 'build', "--prod", "--", "--base-href=/$subpath/"
+        }
+        copy {
+            from "./$dir/www/"
+            into "$buildDir/resources/main/static/$subpath"
+        }
+    }
+}
+
+// the regular app
+task runAppIonicBuild {
+    final String dir = "src/main/webapp/textbase"
+    final subpath="app"
+    doLast {
+        exec {
+            workingDir "./$dir"
+            executable 'npm'
+            args 'install'
+        }
+        exec {
+            workingDir "./$dir"
+            executable 'ionic'
+            args 'build', "--prod",  "--", "--base-href=/$subpath/"
+        }
+        copy {
+            from "./$dir/www/"
+            into "$buildDir/resources/main/static/app"
+        }
+//        copy {
+//            from "./$dir/www/index.html"
+//            into "$buildDir/resources/main/static/app/"
+//            filter { line -> line.replaceAll('href="/"', 'href="/app/"') }
+//        }
+    }
+}
+
+task ionic  {
+    dependsOn runAdminIonicBuild, runAppIonicBuild
+}
+
+//tasks.processResources.dependsOn << runAdminIonicBuild
+tasks.bootRun.dependsOn << ionic
+tasks.jar.dependsOn << ionic
+tasks.bootJar.dependsOn << ionic

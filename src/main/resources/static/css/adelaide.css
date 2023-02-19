@@ -1,0 +1,44 @@
+/*
+
+from https://ebooks.adelaide.edu.au/about/part2.2.html
+*/
+body {
+    background-color:#fcfff6;
+    color:#000;
+    font-family:Georgia, serif;
+    margin:auto;
+    max-width:33em;
+    padding:3em;
+}
+html {
+    background:#fdfdfd url("widgets/endpaper.jpg") fixed;
+}
+p {
+    line-height:150%;
+    margin:0 auto .2em;
+    text-align:justify;
+    text-indent:0;
+}
+p+p { text-indent:2em; }
+h1,h2,h3,h4,h5,h6 {
+        margin:1em auto;
+        text-align:center;
+}
+h1,h2,h3,h4 {
+        font-weight:bold;
+}
+h5, h6 {
+        font-weight:normal;
+}
+h3,h4,h5 {
+        font-variant:small-caps;
+}
+h6      { font-style:italic; }
+h5 em   { font-variant:normal; }
+
+h1 {    font-size:2em; }
+h2 {    font-size:1.4em; }
+h3 {    font-size:1.3em; }
+h4 {    font-size:1.2em; }
+h5, h6 {font-size:1em; }
+

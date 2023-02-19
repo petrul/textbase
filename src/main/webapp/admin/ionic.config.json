@@ -1,0 +1,9 @@
+{
+  "name": "admin",
+  "integrations": {
+    "capacitor": {
+      "enabled": false
+    }
+  },
+  "type": "angular"
+}

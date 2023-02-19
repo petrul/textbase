@@ -1,0 +1,57 @@
+import "../common/functions"
+/**
+    <p>TEI stylesheet for making TEI files from OpenOffice</p>
+ */
+param['debug'] = false
+param['dir'] = "."
+output(encoding:"utf-8", indent = true)
+
+var META = choose {
+    when doc-available(concat($dir,'/meta.xml')) {
+        copyOf(document(concat($dir,'/meta.xml'))//office:meta)
+    }
+    when /office:document/office:meta {
+        copyOf(/office:document/office:meta)
+    }
+    otherwise {
+        copyOf(/office:document-meta/office:meta)
+    }
+}
+
+var documentTitle = choose {
+    when /office:document-content/office:body/office:text/text:p[@text:style-name='Title'] {
+        valueOf /office:document-content/office:body/office:text/text:p[@text:style-name='Title']
+    }
+    when $META/office:meta/dc:title {
+        valueOf $META/office:meta/dc:title
+    }
+    otherwise {
+        "Untitled Document"
+    }
+}
+
+// xsl:template match
+match(text:variable-set|text:variable-get) {
+    choose {
+        when contains(@text:style-name,'entitydecl') {
+            text(disable-output-escaping="yes", "&amp;")
+        }
+        otherwise {
+            'some text here'
+        }
+    }
+}
+
+// xsl:template name
+template(name = "teiHeader") {
+<teiHeader>
+      <fileDesc>
+        <titleStmt>
+          <title>
+            documentTitle
+          </title>
+          <author>
+            documentAuthor
+          </author>
+        </titleStmt>
+}

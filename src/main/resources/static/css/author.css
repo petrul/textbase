@@ -1,0 +1,10 @@
+div.author-card {
+    max-width:400px;
+    margin: 80px auto;
+}
+#opuses-list ul li {
+    content : "❖";
+    color:darkblue;
+    font-size: 150%;
+}
+

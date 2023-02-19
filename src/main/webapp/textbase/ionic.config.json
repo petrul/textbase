@@ -1,0 +1,7 @@
+{
+  "name": "textbase",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TEI xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <teiHeader>
+    <fileDesc>
+        <titleStmt>
+            <title>Biblia sau Sfânta Scriptură</title>
+
+            <respStmt>
+                <resp>edited by</resp>
+                <name>Aociația Studenților Creștin-Ortodocși din România (ASCOR)</name>
+            </respStmt>
+        </titleStmt>
+    <publicationStmt>
+        <distributor>Scriptorium</distributor>
+    </publicationStmt>
+    <sourceDesc>
+        <bibl>Biblia românească, în trad</bibl>
+    </sourceDesc>
+    </fileDesc>
+    </teiHeader>
+
+    <text>
+        <body>
+            <div type="parte" id="vt" n="1">
+                <head>Vechiul Testament</head>
+                <xi:include href="capitole/facerea.xml"  />
+            </div>
+        </body>
+    </text>
+
+</TEI>

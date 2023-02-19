@@ -1,0 +1,76 @@
+<html>
+<head>
+    <script>
+        const params = new Proxy(new URLSearchParams(window.location.search), { get: (searchParams, prop) => searchParams.get(prop), });
+        const nr = params.nr;
+        if (nr == null) {
+            var href = window.location.href
+            while (href.endsWith('/')) {
+                href = href.substring(0, href.length - 1);
+            }
+            const splits = href.split("/");
+            const lastSplit = splits[splits.length - 1];
+            window.location.href = "../app/authors/" + lastSplit
+        }
+    </script>
+    <script th:replace="fragments/google-analytics" />
+    <title th:text="|Author ${author.visualName}|"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <meta name="author" th:content="${author.visualName}" content="Vasile Alecsandri"/>
+
+    <link rel="stylesheet" 
+        href="../static/bootstrap-5.2.1-dist/css/bootstrap.min.css"
+        th:href="@{/bootstrap-5.2.1-dist/css/bootstrap.min.css}"
+        crossorigin="anonymous"
+    />
+    <link href="https://fonts.googleapis.com/css?family=Alegreya:400,400i,700|PT+Sans+Narrow" rel="stylesheet" />
+
+    <link rel="stylesheet" th:href="@{/css/etext.store.css}"    href="../static/css/etext.store.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/author.css}"         href="../static/css/author.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/share-buttons.css}"  href="../static/css/share-buttons.css" type="text/css" />
+
+</head>
+<body>
+    <script th:replace="fragments/google-analytics" ></script>
+
+    <div id="navbar" class="navbar">
+        <a th:href="@{/}" href="#">TEXT&nbsp;❖&nbsp;BASE</a>
+        <a
+                class="title"
+                th:text="${author.visualName}"
+                th:href="@{|/${author.strId}|}"
+                href="#"
+        >Numele Autorului</a>
+    </div>
+
+
+    <div class="author-card">
+        <div class="container">
+            <h1><b><span th:text="${author.visualName}"></span></b></h1>
+            <p th:text="${author.description}">Architect & Engineer</p>
+        </div>
+    </div>
+
+    <div id="opuses-carousel">
+
+    </div>
+
+    <ul th:each="d: ${rootDivs}" id="opuses-list">
+        <a th:href="@{|${#httpServletRequest.requestURI}/${d.urlFragment}|}" th:title="${d}"><li th:text="${d.head}" /></a>
+    </ul>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="   crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script
+            src="../static/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            th:href="@{/bootstrap-5.2.1-dist/js/bootstrap.bundle.min.js}"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
+
+    <script th:src="@{/js/share-buttons.js}" src="../static/js/share-buttons.js"></script>
+
+</body>
+</html>
+

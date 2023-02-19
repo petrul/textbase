@@ -1,0 +1,323 @@
+body {
+    background-color: rgb(232, 232, 232);
+    margin:auto;
+    margin-top: 20px;
+}
+
+div.under_navbar {
+    /* this should have precisely the height of the navbar */
+    height:40pt;
+}
+
+div.body {
+    /* border:  1px solid black; */
+    background-color: white;
+    padding:10px 7% 70px 7%;
+    margin: 10px auto 0 auto;
+
+    max-width: 800px;
+    min-height: 800px; /* to hide the navbar by scrolling */
+
+    -webkit-box-shadow: 8px 8px 30px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 8px 8px 30px 0px rgba(0,0,0,0.4);
+    box-shadow: 8px 8px 30px 0px rgba(0,0,0,0.4);
+}
+
+div.body-of-text {
+    padding-bottom:3em;
+}
+
+.toc {
+    
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 14pt;
+
+    padding: 10pt;
+
+    text-align:center;
+    background-color: gray;
+    color: white;
+
+
+    top: 0px;
+
+    -webkit-box-shadow: 8px 8px 30px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 8px 8px 30px 0px rgba(0,0,0,0.4);
+    box-shadow: 8px 8px 30px 0px rgba(0,0,0,0.4);
+
+}
+
+#toc { 
+    display: flex; 
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+    align-items: center;
+}
+#toc li {
+    list-style-type: none;
+    padding: 10px;
+    /* background-color: red; */
+}
+/* #toc li::after { content: ' ■ ' }
+#toc li.last::after { content: none; } */
+
+/* #toc a:link    { color: white; text-decoration: none; }
+#toc a:visited { color: white; text-decoration: none; }
+#toc   a:hover { color: white; text-decoration: underline; }
+#toc a:active  { color: white; text-decoration: underline; } */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'PT Sans Narrow', sans-serif;
+    
+    padding-bottom: 10pt;
+    color: black;
+    
+}
+
+
+h1 span.head-label, h2 span.head-label, h3 span.head-label, 
+h4 span.head-label {
+    display: block;
+    color:red;
+    font-variant: small-caps;
+    font-weight: normal;
+    font-size: 80%;
+    margin-bottom: 20px;
+    color:#222;
+}
+
+h5 span.head-label, h6 span.head-label {
+    display: inline;
+    color:red;
+    font-variant: small-caps;
+    font-weight: normal;
+    color:#222;
+    margin-right: 5px;
+}
+
+h1 {
+    padding-top: 30pt;
+    font-size: 30pt;
+    text-align: center;
+    font-weight:bold;
+    font-variant: small-caps;
+    //text-transform: uppercase;
+}
+
+h2.author   { margin-top:0; padding-top: 0;}
+h2 {
+    padding-top: 30pt;
+    font-size: 20pt;
+    text-align: center;
+    margin-bottom: 1.2em;
+    font-weight:bold; 
+}
+
+
+h3 {
+    padding-top: 30pt;
+    font-size: 20pt;
+    text-align: center;
+    margin-bottom: 20pt;
+    
+}
+
+h4 {
+    padding-top: 30pt;
+    font-size: 18pt;
+    text-align: center;
+    margin-bottom: 20pt;
+}
+
+div.meta {
+    /* margin-top: 3em; */
+    /* background-color: #eee; */
+    /* border:1px solid #ccc; */
+    text-align:center;
+    font-family: sans-serif, arial;
+    font-size: xx-small;
+
+    /* position: absolute; */
+    margin:10em 0 0 0;
+    padding-bottom: 0;
+}
+div.meta div {
+    padding-top: 1em;
+    display: inline;
+}
+
+div.meta p { display: inline; }
+
+div.meta p, div.meta a {
+    font-family: sans-serif, arial;
+    font-size: smaller;
+    text-align: center;
+}
+
+p {
+    font-size: 16pt;
+    font-family: Alegreya, "Times New Roman", Times, serifserif;
+    text-align: justify;
+    hyphens: auto;
+}
+
+p.subtitle {
+    font-style: italic;
+    text-align: center;
+    margin-top:-1em;
+    margin-bottom: 2em;
+}
+
+.note {
+    padding: 3px;
+    background-color: yellow;
+    color:black;
+    /*color: rgba(15, 148, 15, 0.762);*/
+
+}
+
+.lg {
+    width:max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.l {
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    text-align: left;
+    
+    width: max-content; 
+    width: -moz-max-content;    /* Firefox/Gecko */
+    width: -webkit-max-content; /* Chrome */
+
+    /* background-color: red; */
+
+    /* padding-left:2em; */
+    /* text-indent: -2em; */
+
+    /* text-indent: 40px; 
+    margin-left: -40px; */
+
+}
+
+.l:last-child {
+    margin-bottom: 1em;
+}
+
+/* p.l::first-line {
+    color:white;
+    text-align: left;
+} */
+
+::selection {
+    color: #000000;
+    background: #ffd343;
+}
+
+
+/* from the tei rend attr */
+.italic {
+    font-style: italic;
+}
+
+.start, .left {
+    text-align: left;
+}
+
+.end, .right {
+    text-align: right;
+    padding-top:1rem;
+}
+
+.center {
+    text-align: center;
+}
+
+.trailer {
+    text-align: right;
+    font-style: italic;
+    padding-top: 1em;
+}
+
+.epigraph {
+    text-align: right;
+    font-style: italic;
+    padding-bottom: 1em;
+}
+
+.opener {
+    padding: 1em 1em 1em 0;
+    font-style: italic;
+
+}
+
+.closer {
+    text-align: right;
+    font-style: italic;
+    padding-top: 1.5em;
+}
+
+/* prev, up, next */
+#navbuttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+#navbuttons img {
+    width: 50px;
+    height: 50px;
+}
+
+.rotate-180 {
+        -webkit-transform: rotate(180deg);     /* Chrome and other webkit browsers */
+        -moz-transform: rotate(180deg);        /* FF */
+        -o-transform: rotate(180deg);          /* Opera */
+        -ms-transform: rotate(180deg);         /* IE9 */
+        transform: rotate(180deg);             /* W3C compliant browsers */
+      
+        /* IE8 and below */
+        filter: progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, DX=0, DY=0, SizingMethod='auto expand');      
+}
+
+.rotate-270 {
+    -webkit-transform: rotate(270deg);     /* Chrome and other webkit browsers */
+    -moz-transform: rotate(270deg);        /* FF */
+    -o-transform: rotate(270deg);          /* Opera */
+    -ms-transform: rotate(270deg);         /* IE9 */
+    transform: rotate(270deg);             /* W3C compliant browsers */
+  
+    /* IE8 and below */
+    filter: progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, DX=0, DY=0, SizingMethod='auto expand');      
+}
+
+.breadcrumb {
+    background-color: initial;
+}
+
+.illustration {
+    max-width: 100%;
+    display: block;
+    margin: auto;
+}
+p.deco-title-author-separator, p.deco-end {
+    text-align: center;
+}
+img.deco-title-author-separator {
+    max-width: 80%;
+}
+
+p.deco-end {
+    margin-bottom: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+
+}
+img.deco-end {
+    max-width: 100px;
+    margin: 30px auto;
+}

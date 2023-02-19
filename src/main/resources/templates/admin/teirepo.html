@@ -1,0 +1,24 @@
+<h3>TEI repo admin</h3>
+
+<h3 th:text="${teidir}">Tei dir here</h3>
+<table>
+    <thead>
+        <tr>
+            <th>xml files</th>
+        </tr>
+    </thead>
+    
+    <tbody th:each="tf: ${teis}">
+        <tr>
+            <td><a th:href="@{|/api/files/file?name=${tf}|}"><span th:text="${tf}"></span></a></td>
+        </tr>
+    </tbody>
+
+</table>
+
+<p th:text="${teis}" />
+
+<form action="reinit" method="post">
+    Reinit form
+    <input type="submit" value="reinit" />
+</form>
